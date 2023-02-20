@@ -9,7 +9,7 @@ from yolov5.utils.torch_utils import select_device
 
 
 def load_model(
-    model_path, device=None, autoshape=True, verbose=False, hf_token: str = None
+    model_path, device=None, autoshape=True, verbose=False, fp16=False, hf_token: str = None
 ):
     """
     Creates a specified YOLOv5 model
@@ -36,7 +36,7 @@ def load_model(
 
     try:
         model = DetectMultiBackend(
-            model_path, device=device, fuse=autoshape, hf_token=hf_token
+            model_path, device=device, fuse=autoshape, hf_token=hf_token, fp16=fp16
         )  # detection model
         if autoshape:
             if model.pt and isinstance(model.model, ClassificationModel):
